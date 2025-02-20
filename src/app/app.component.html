@@ -1,0 +1,36 @@
+@if(dragOver$ | async ){} @if(dragLeave$ | async ){} @if(drop$ | async ){} @let
+images = (drop$|async)??[];
+
+<div class="dropfiles">
+  <h1 class="title">IMAGES DROPPER</h1>
+  <div class="container">
+    <div #dropContainer class="drop-container">
+      <div class="drop-msg">
+        <input #inputFiles id="input" type="file" />
+        <label for="input">Drop here your images</label>
+      </div>
+    </div>
+  </div>
+  <h2 class="title">YOUR IMAGES</h2>
+  <div>
+    <ul>
+      @if(images.length == 0){
+      <span class="no-images-txt">No images dropped</span>
+      } @for(img of images;track img.id){
+      <ng-template
+        *ngTemplateOutlet="file; context: { $implicit: img }"
+      ></ng-template>
+      }
+    </ul>
+  </div>
+
+  <ng-template #file let-img>
+    <div @expandVertical class="img-info-container">
+      <img [src]="img?.url" [alt]="img?.id" />
+      <div class="img-data">
+        <div class="feature">Name: {{ img.id }}</div>
+        <div class="feature">Size: {{ img.size }} MB</div>
+      </div>
+    </div>
+  </ng-template>
+</div>
