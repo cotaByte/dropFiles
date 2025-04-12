@@ -6,7 +6,12 @@ images = (drop$|async)??[];
   <div class="container">
     <div #dropContainer class="drop-container">
       <div class="drop-msg">
-        <input #inputFiles id="input" type="file" />
+        <input
+          #inputFiles
+          id="input"
+          accept="image/png, image/gif, image/jpeg"
+          type="file"
+        />
         <label for="input">Drop here your images</label>
       </div>
     </div>

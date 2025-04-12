@@ -6,6 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import {
+  filter,
   fromEvent,
   map,
   ReplaySubject,
@@ -76,6 +77,11 @@ export class AppComponent {
           return e.dataTransfer?.files;
         })
       )
+    ),
+    filter(
+      (files) =>
+        !!files &&
+        Array.from(files).some((file) => file.type.startsWith('image/'))
     ),
     map((files) => {
       if (!files) return [];
